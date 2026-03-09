@@ -1,0 +1,143 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects";
+---
+
+<Layout title="Gonzalo Polo — Mis Proyectos">
+	<main>
+		<!-- Hero -->
+		<header class="hero">
+			<span class="hero__badge">Portfolio</span>
+			<h1 class="hero__title">Mis Proyectos</h1>
+			<p class="hero__subtitle">
+				Todos los proyectos han sido realizados por <strong
+					>Gonzalo Polo</strong
+				>, desarrollador fullstack graduado en <strong
+					>Desarrollo de Aplicaciones Multiplataforma</strong
+				>.
+			</p>
+		</header>
+
+		<!-- Projects grid -->
+		<section class="projects" aria-label="Proyectos">
+			<div class="projects__grid">
+				{projects.map((project) => <ProjectCard project={project} />)}
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class="footer">
+			<p>
+				&copy; {new Date().getFullYear()} Gonzalo Polo &mdash; Hecho con
+				<a
+					href="https://astro.build"
+					target="_blank"
+					rel="noopener noreferrer">Astro</a
+				>
+			</p>
+		</footer>
+	</main>
+</Layout>
+
+<style>
+	main {
+		width: 100%;
+		max-width: 1120px;
+		margin: 0 auto;
+		padding: 0 24px;
+	}
+
+	/* ── Hero ──────────────────────────────────────────── */
+	.hero {
+		text-align: center;
+		padding: 80px 0 56px;
+	}
+
+	.hero__badge {
+		display: inline-block;
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--color-accent);
+		background: var(--color-accent-glow);
+		padding: 6px 16px;
+		border-radius: 999px;
+		margin-bottom: 20px;
+	}
+
+	.hero__title {
+		font-size: clamp(2rem, 5vw, 3.25rem);
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		line-height: 1.1;
+		margin-bottom: 16px;
+		background: linear-gradient(135deg, #fff 40%, var(--color-accent));
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.hero__subtitle {
+		max-width: 540px;
+		margin: 0 auto;
+		font-size: 1.05rem;
+		line-height: 1.65;
+		color: var(--color-text-muted);
+	}
+
+	.hero__subtitle strong {
+		color: var(--color-text);
+		font-weight: 600;
+	}
+
+	/* ── Projects ─────────────────────────────────────── */
+	.projects {
+		padding-bottom: 80px;
+	}
+
+	.projects__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+		gap: 32px;
+		justify-items: center;
+	}
+
+	/* When only 1 card, center it and cap width */
+	.projects__grid > :global(:only-child) {
+		max-width: 480px;
+		width: 100%;
+	}
+
+	/* ── Footer ───────────────────────────────────────── */
+	.footer {
+		text-align: center;
+		padding: 32px 0 48px;
+		border-top: 1px solid var(--color-border);
+		font-size: 0.85rem;
+		color: var(--color-text-muted);
+	}
+
+	.footer a {
+		color: var(--color-accent);
+		font-weight: 500;
+		transition: opacity 0.2s;
+	}
+
+	.footer a:hover {
+		opacity: 0.8;
+	}
+
+	/* ── Responsive ───────────────────────────────────── */
+	@media (max-width: 480px) {
+		.hero {
+			padding: 56px 0 40px;
+		}
+
+		.projects__grid {
+			grid-template-columns: 1fr;
+			gap: 24px;
+		}
+	}
+</style>

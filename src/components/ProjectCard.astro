@@ -1,0 +1,198 @@
+---
+import type { Project } from "../data/projects";
+
+interface Props {
+    project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<a
+    class="card"
+    href={project.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`Ver proyecto: ${project.name}`}
+>
+    <!-- Browser chrome -->
+    <div class="chrome">
+        <div class="dots">
+            <span class="dot dot--red"></span>
+            <span class="dot dot--yellow"></span>
+            <span class="dot dot--green"></span>
+        </div>
+        <div class="url-bar">
+            <span class="url-bar__text"
+                >{project.url.replace(/^https?:\/\//, "")}</span
+            >
+        </div>
+    </div>
+
+    <!-- Preview -->
+    <div class="preview">
+        <img
+            src={project.image}
+            alt={`Preview de ${project.name}`}
+            loading="lazy"
+        />
+    </div>
+
+    <!-- Info -->
+    <div class="info">
+        <h2 class="info__name">{project.name}</h2>
+        <p class="info__desc">{project.description}</p>
+    </div>
+
+    <!-- Hover overlay arrow -->
+    <div class="overlay" aria-hidden="true">
+        <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <path d="M7 17L17 7"></path>
+            <path d="M7 7h10v10"></path>
+        </svg>
+    </div>
+</a>
+
+<style>
+    /* ── Card ──────────────────────────────────────────── */
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-card);
+        transition:
+            transform var(--transition-base),
+            box-shadow var(--transition-base);
+        cursor: pointer;
+    }
+
+    .card:hover {
+        transform: translateY(-6px) scale(1.015);
+        box-shadow: var(--shadow-card-hover);
+    }
+
+    .card:hover .overlay {
+        opacity: 1;
+    }
+
+    .card:hover .preview img {
+        transform: scale(1.03);
+    }
+
+    /* ── Chrome bar ───────────────────────────────────── */
+    .chrome {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        background: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .dots {
+        display: flex;
+        gap: 7px;
+        flex-shrink: 0;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+
+    .dot--red {
+        background: var(--color-dot-red);
+    }
+    .dot--yellow {
+        background: var(--color-dot-yellow);
+    }
+    .dot--green {
+        background: var(--color-dot-green);
+    }
+
+    .url-bar {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: var(--radius-md);
+        padding: 6px 14px;
+        overflow: hidden;
+    }
+
+    .url-bar__text {
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: block;
+    }
+
+    /* ── Preview ──────────────────────────────────────── */
+    .preview {
+        overflow: hidden;
+        background: #111118;
+    }
+
+    .preview img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        transition: transform var(--transition-base);
+    }
+
+    /* ── Info ──────────────────────────────────────────── */
+    .info {
+        padding: 20px;
+    }
+
+    .info__name {
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        margin-bottom: 4px;
+    }
+
+    .info__desc {
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+    }
+
+    /* ── Hover overlay ────────────────────────────────── */
+    .overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(14, 14, 18, 0.55);
+        backdrop-filter: blur(2px);
+        opacity: 0;
+        transition: opacity var(--transition-base);
+        color: var(--color-accent);
+    }
+
+    .overlay svg {
+        background: var(--color-surface);
+        border-radius: 50%;
+        padding: 14px;
+        width: 56px;
+        height: 56px;
+        box-shadow: 0 0 24px var(--color-accent-glow);
+    }
+</style>
