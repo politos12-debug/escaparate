@@ -12,11 +12,10 @@ export const projects: Project[] = [
     url: "https://galiana.victoriafp.online",
     image: "/images/galiana-preview.webp",
   },
-  // Añade más proyectos aquí:
-  // {
-  //   name: "Mi Siguiente Proyecto",
-  //   description: "Descripción del proyecto",
-  //   url: "https://example.com",
-  //   image: "/images/mi-proyecto.webp",
-  // },
+  {
+    name: "Report Sanlucar",
+    description: "Aplicación para reportar incidencias de la ciudad",
+    url: "https://reportsanlucar.vercel.app",
+    image: "/images/reportsanlucar-preview.webp",
+  },
 ];

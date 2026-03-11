@@ -145,12 +145,16 @@ const { project } = Astro.props;
     .preview {
         overflow: hidden;
         background: #111118;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .preview img {
         width: 100%;
-        height: auto;
-        object-fit: contain;
+        height: 100%;
+        object-fit: cover;
         display: block;
         transition: transform var(--transition-base);
     }
